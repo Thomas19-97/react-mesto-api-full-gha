@@ -41,7 +41,7 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
 
-  bcrypt.hash(password, 10)
+  bcrypt.hash(password, 200)
     .then((hash) => User.create({
       name,
       about,
@@ -49,14 +49,15 @@ const createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then(() => {
-      res
-        .status(200)
-        .send({
-          data: {
-            name, about, avatar, email,
-          },
-        });
+    .then((newUser) => {
+      res.status(200).send({
+        data: {
+          name: newUser.name,
+          about: newUser.about,
+          avatar: newUser.avatar,
+          email: newUser.email,
+        },
+      });
     })
     .catch((error) => {
       if (error.code === 11000) {
@@ -125,7 +126,7 @@ const getCurrentUserInfo = (req, res, next) => {
     })
     .then((user) => res
       .status(200)
-      .send({ user }))
+      .send(user))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));

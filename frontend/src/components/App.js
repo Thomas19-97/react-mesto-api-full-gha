@@ -31,6 +31,8 @@ function App() {
     const [responseImage, setResponseImage] = useState('');
     const [responseTitle, setResponseTitle] = useState('');
     const [isInfoTooltip, setIsInfoTooltip] = useState(false);
+   
+
     React.useEffect(() => {
         if (isLoggedIn) {
             Promise.all([api.getUserData(), api.getInitialCards()]).then(([userData, cards]) => {
@@ -87,13 +89,13 @@ function App() {
                 console.log(`Ошибка ${err}`)
             });
     }
-    function handleUpdateUser(currentUser) {
+    function handleUpdateUser(name, about) {
         api.passeUserData(currentUser.name, currentUser.about).then((res) => {
             setCurrentUser(res);
             closeAllPopups();
         })
             .catch((err) => {
-                console.log(`Ошибка ${err}`)
+                console.log(`Ошибка ${err.message}`)
             });
     }
     function handleUpdateAvatar(currentUser) {
@@ -117,10 +119,10 @@ function App() {
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            authApi.verificateUser(token).then((res) => {
+            authApi.verificateUser().then((res) => {
                 if (res) {
                     setIsLoggedIn(true);
-                    setEmail(res.data.email);
+                    setEmail(res.email);
                 }
             })
                 .catch((err) => {
@@ -156,7 +158,7 @@ function App() {
         authApi.registerUser(email, password).then(() => {
             setResponseImage(Da);
             setResponseTitle('Вы успешн о зарегистрировались!')
-            Navigate('/sign-in');
+            Navigate('/signin');
         }).catch(() => {
             setResponseImage(Net);
             setResponseTitle('Что-то пошло не так! Попробуйте ещё раз.')
@@ -166,7 +168,7 @@ function App() {
         setIsLoggedIn(false)
         localStorage.removeItem('token')
         setEmail('');
-        Navigate('/sign-in')
+        Navigate('/signin')
     }
 
 
@@ -175,21 +177,21 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
                 <Routes>
-                    <Route path='/sign-in' element={
+                    <Route path='/signin' element={
                         <>
                             <Header
                                 title='Регистрация'
-                                route='/sign-up' />
+                                route='/signup' />
                             <Login
                                 onLogin={onLogin}
                             />
                         </>
                     } />
-                    <Route path="/sign-up" element={
+                    <Route path="/signup" element={
                         <>
                             <Header
                                 title="Войти"
-                                route="/sign-in" />
+                                route="/signin" />
                             <Register
                                 onRegister={onRegister}
                             />
@@ -212,7 +214,7 @@ function App() {
                             <Footer />
                         </>
                     } />
-                    <Route path='*' element={<Navigate to={isLoggedIn ? '/' : '/sign-in'} />} />
+                    <Route path='*' element={<Navigate to={isLoggedIn ? '/' : '/signin'} />} />
                 </Routes>
                 <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}

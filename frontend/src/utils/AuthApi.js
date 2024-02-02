@@ -26,7 +26,8 @@ class authorizationApi {
         })
             .then(this._handlingServerResponse)
     }
-    verificateUser(token) {
+    verificateUser() {
+        const token = localStorage.getItem('token');
         return fetch(`${this._authorizationUrl}/users/me`, {
             method: `GET`,
             headers: {
@@ -38,5 +39,5 @@ class authorizationApi {
     }
 
 }
-const authApi = new authorizationApi('https://auth.nomoreparties.co');
+const authApi = new authorizationApi('http://localhost:3000');
 export default authApi;

@@ -21,7 +21,7 @@ function Register(props) {
                 <input className="authorization__input" required placeholder="Password" type="password" onChange={handlePassword}></input>
                 <button className="authorization__button" type="submit">Зарегистрироваться</button>
             </form>
-            <p className="authorization__subtitle">Уже зарагистрированны?<Link to='/sign-in' className="authorization__link">Войти</Link></p>
+            <p className="authorization__subtitle">Уже зарагистрированны?<Link to='/signin' className="authorization__link">Войти</Link></p>
 
         </section>
     )

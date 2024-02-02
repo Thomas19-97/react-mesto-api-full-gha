@@ -1,7 +1,7 @@
 class Api {
-    constructor({ url, headers }) {
+    constructor({ url }) {
         this._url = url;
-        this._headers = headers
+
     }
     /** Обработка ответа сервера */
     _handlingServerResponse(res) {
@@ -13,8 +13,11 @@ class Api {
     }
     /** Получение данных профиля */
     getUserData() {
-        return fetch(`${this._url}users/me`, {
-            headers: this._headers
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/users/me`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
             .then(res => {
                 return this._handlingServerResponse(res);
@@ -24,8 +27,11 @@ class Api {
     };
     /** Загрузка начальных карточек с сервера */
     getInitialCards() {
-        return fetch(`${this._url}cards`, {
-            headers: this._headers
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/cards`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
             .then(res => {
                 return this._handlingServerResponse(res);
@@ -33,8 +39,11 @@ class Api {
     }
     /** Отправление новых данных пользователя на сервер */
     passeUserData(name, job) {
-        return fetch(`${this._url}users/me`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/users/me`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             method: 'PATCH',
             body: JSON.stringify({
                 name: name,
@@ -47,8 +56,11 @@ class Api {
     }
     /** Добавление новой карточки */
     postNewCard(name, link) {
-        return fetch(`${this._url}cards`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/cards`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             method: 'POST',
             body: JSON.stringify({ name, link })
         })
@@ -58,8 +70,11 @@ class Api {
     }
     /** Удаление карточки */
     deleteCard(cardId) {
-        return fetch(`${this._url}cards/${cardId}`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/cards/${cardId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             method: 'DELETE'
         })
             .then(res => {
@@ -68,8 +83,11 @@ class Api {
     }
     /** Постановка лайка карточке */
     placeCardLike(cardId) {
-        return fetch(`${this._url}cards/${cardId}/likes`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             method: 'PUT'
         })
             .then(res => {
@@ -78,8 +96,11 @@ class Api {
     }
     /** Удаление лайка */
     deleteCardLike(cardId) {
-        return fetch(`${this._url}cards/${cardId}/likes`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
             method: 'DELETE'
         })
             .then(res => {
@@ -88,8 +109,11 @@ class Api {
     }
     /** Отправка данных аватара */
     passAvatarData(avatar) {
-        return fetch(`${this._url}users/me/avatar`, {
-            headers: this._headers,
+        const token = localStorage.getItem('token');
+        return fetch(`${this._url}/users/me/avatar`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
             method: 'PATCH',
             body: JSON.stringify({ avatar: avatar })
         })
@@ -100,10 +124,6 @@ class Api {
     }
 };
 const api = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-77/',
-    headers: {
-        authorization: '7838e6f3-5851-44f6-8023-4e26f5b26a5c',
-        'Content-Type': 'application/json'
-    }
+    url: 'http://localhost:3000',
 });
 export default api;
