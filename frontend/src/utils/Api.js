@@ -112,7 +112,7 @@ class Api {
 }
 
 const api = new Api({
-    url: 'http://localhost:3000',
+    url: 'https://api.tomm.nomoredomainsmonster.ru',
 });
 
 export default api;
