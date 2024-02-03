@@ -41,7 +41,7 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
 
-  bcrypt.hash(password, 200)
+  bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
       about,
@@ -50,7 +50,7 @@ const createUser = (req, res, next) => {
       password: hash,
     }))
     .then((newUser) => {
-      res.status(200).send({
+      res.status(201).send({
         data: {
           name: newUser.name,
           about: newUser.about,
@@ -59,17 +59,17 @@ const createUser = (req, res, next) => {
         },
       });
     })
-    .catch((error) => {
-      if (error.code === 11000) {
+    .catch((e) => {
+      if (e.code === 11000) {
         next(new ConflictError('Этот email уже зарегистрирован'));
-      } else if (error instanceof mongoose.Error.ValidationError) {
-        const message = Object.values(error.errors)
-          .map((err) => err.message)
+      } else if (e instanceof mongoose.Error.ValidationError) {
+        const message = Object.values(e.errors)
+          .map((error) => error.message)
           .join('; ');
 
         next(new BadRequestError(message));
       } else {
-        next(error);
+        next(e);
       }
     });
 };
