@@ -17,7 +17,7 @@ const { loginValidation, createUserValidation } = require('./middlewares/validat
 const app = express();
 app.use(helmet());
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 app.use(requestLogger);
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);

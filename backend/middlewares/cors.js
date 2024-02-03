@@ -3,14 +3,10 @@ const allowedCors = [
   'http://localhost:3000',
   'http://localhost:3001',
   'https://localhost:3001',
-  'https://api.tom.nomoredomainsmonster',
-  'https://tom.nomoredomainsmonster',
-  'http://api.tom.nomoredomainsmonster',
-  'http://tom.nomoredomainsmonster',
-  'https://tom.nomoredomainsmonster.ru',
+  'https://api.tom.nomoredomainsmonster.ru',
   'https://api.tom.nomoredomainsmonster.ru',
   'http://tom.nomoredomainsmonster.ru',
-  'http://api.tom.nomoredomainsmonster.ru',
+  'http://tom.nomoredomainsmonster.ru',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
