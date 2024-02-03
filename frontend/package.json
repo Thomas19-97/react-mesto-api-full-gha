@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "scp -r ./build/* tyhec@158.160.135.125:/home/tyhec/react-mesto-api-full-gha/frontend"
+    "deploy": "scp -r ./build/* tyhec@158.160.139.119:/home/tyhec/frontend"
   },
   "eslintConfig": {
     "extends": [

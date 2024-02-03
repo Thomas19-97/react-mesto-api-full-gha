@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.139.119
 
-Frontend tom.nomoredomainsmonster.ru
+Frontend https://tom.nomoredomainsmonster.ru
 
-Backend api.tom.nomoredomainsmonster.ru
+Backend https://api.tomm.nomoredomainsmonster.ru
