@@ -57,9 +57,9 @@ class Api {
     /** Добавление новой карточки */
     postNewCard(name, link) {
         const token = localStorage.getItem('token');
-        return fetch(`${this._url}/cards`, {
+        return fetch (`${this._url}/cards`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                'Authorization': `Bearer ${token}`,
             },
             method: 'POST',
             body: JSON.stringify({ name, link })

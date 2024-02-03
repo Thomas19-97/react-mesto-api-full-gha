@@ -31,8 +31,7 @@ function App() {
     const [responseImage, setResponseImage] = useState('');
     const [responseTitle, setResponseTitle] = useState('');
     const [isInfoTooltip, setIsInfoTooltip] = useState(false);
-   
-
+    
     React.useEffect(() => {
         if (isLoggedIn) {
             Promise.all([api.getUserData(), api.getInitialCards()]).then(([userData, cards]) => {
@@ -89,7 +88,7 @@ function App() {
                 console.log(`Ошибка ${err}`)
             });
     }
-    function handleUpdateUser(name, about) {
+    function handleUpdateUser(currentUser) {
         api.passeUserData(currentUser.name, currentUser.about).then((res) => {
             setCurrentUser(res);
             closeAllPopups();
