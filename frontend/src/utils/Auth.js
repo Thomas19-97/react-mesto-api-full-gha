@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.tom.nomoredomainsmonster.ru';
+export const BASE_URL = 'http://localhost:3000';
 
 export const checkResponse = (res) => {
     if (res.ok) {
