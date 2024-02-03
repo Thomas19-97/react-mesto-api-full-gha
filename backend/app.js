@@ -1,15 +1,12 @@
-require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const cors = require('cors');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/notFoundError');
 
-const { DB_ADRES } = process.env;
-const { PORT } = process.env;
+const { PORT = 3000 } = process.env;
 const { userRouter } = require('./routes/users');
 const { cardRouter } = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
@@ -26,7 +23,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
 app.post('/signin', loginValidation, login);
 app.post('/signup', createUserValidation, createUser);
 app.use(auth);
@@ -49,7 +45,7 @@ app.use((error, req, res, next) => {
 
   next();
 });
-mongoose.connect(DB_ADRES);
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
