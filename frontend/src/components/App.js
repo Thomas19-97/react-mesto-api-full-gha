@@ -43,6 +43,21 @@ function App() {
     checkToken();
   }, []);
 
+  function checkToken() {
+    if (currentToken) {
+      auth.getContent(currentToken).then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          setUserEmail(res.email);
+          navigate("/", { replace: true });
+        }
+      })
+        .catch(() => {
+          console.log(`Ошибка при проверке токена`);
+        });
+    }
+  }
+
 
   useEffect(() => {
     if (loggedIn && currentToken) {
@@ -99,20 +114,6 @@ function App() {
     navigate('/sign-in', { replace: true });
   }
 
-  function checkToken() {
-    if (currentToken) {
-      auth.getContent(currentToken).then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          setUserEmail(res.email);
-          navigate("/", { replace: true });
-        }
-      })
-        .catch(() => {
-          console.log(`Ошибка при проверке токена`);
-        });
-    }
-  }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
