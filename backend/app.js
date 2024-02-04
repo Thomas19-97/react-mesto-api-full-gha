@@ -30,11 +30,11 @@ app.post('/signup', createUserValidation, createUser);
 app.use(auth);
 app.use(userRouter);
 app.use(cardRouter);
-app.use(errorLogger);
-app.use(errors());
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Такой страницы не существует'));
 });
+app.use(errorLogger);
+app.use(errors());
 app.use((error, req, res, next) => {
   const { statusCode = 500, message } = error;
   res
