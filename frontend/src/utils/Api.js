@@ -11,7 +11,8 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    getUserData(token) {
+    getUserData() {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/users/me`, {
             method: 'GET',
             headers: {
@@ -22,7 +23,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    getInitialCards(token) {
+    getInitialCards() {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/cards`, {
             method: 'GET',
             headers: {
@@ -33,7 +35,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    editProfile(userName, userAbout, token) {
+    editProfile(userName, userAbout) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: {
@@ -48,7 +51,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    addNewCard(newName, newUrl, token) {
+    addNewCard(newName, newUrl) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: {
@@ -63,7 +67,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    deleteCard(cardId, token) {
+    deleteCard(cardId) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/cards/${cardId}`, {
             method: 'DELETE',
             headers: {
@@ -74,7 +79,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    setLike(cardId, token) {
+    setLike(cardId) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: {
@@ -85,7 +91,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    removeLike(cardId, token) {
+    removeLike(cardId) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: {
@@ -96,7 +103,8 @@ class Api {
             .then(this.checkResponse);
     }
 
-    changeAvatar(avatarSrc, token) {
+    changeAvatar(avatarSrc) {
+        const token = localStorage.getItem('token');
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
