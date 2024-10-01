@@ -51,3 +51,8 @@ IP 158.160.139.119
 Frontend https://tom.nomoredomainsmonster.ru
 
 Backend https://api.tomm.nomoredomainsmonster.ru
+
+## Скриншот:
+<details><summary><b>Развернуть</b></summary>
+
+[![mesto-react](https://user-images.githubusercontent.com/86494748/143663354-f7a10773-c21f-4347-aede-92c69976a679.jpg)](https://github.com/Thomas19-97/react-mesto-api-full-gha)
